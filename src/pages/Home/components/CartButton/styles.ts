@@ -1,10 +1,11 @@
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 interface CartIconProps {
   value?: number;
 }
 
-export const CartIcon = styled.button<CartIconProps>`
+export const CartIcon = styled(Link)<CartIconProps>`
   display: flex;
   align-self: center;
   padding: 0.5rem;
@@ -29,7 +30,8 @@ export const CartIcon = styled.button<CartIconProps>`
         top: -0.5rem;
         right: -0.5rem;
         border-radius: 50%;
-        background-color: ${({ theme }) => theme.colors['yellow-dark']};
+        background-color: ${({ theme }) => theme.colors['purple-dark']};
+        filter: brightness(0.8);
         color: ${({ theme }) => theme.colors['white']};
         display: flex;
         align-items: center;

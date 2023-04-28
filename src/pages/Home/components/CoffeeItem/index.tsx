@@ -1,5 +1,6 @@
 import { CartInput } from '../../../../components/CartInput';
 import type { Coffee } from '../../../../constants/menu';
+import { useCartContext } from '../../../../hooks/useCartContext';
 import { CartButton } from '../CartButton';
 import { Badges, Cart, Container, Price, Text } from './styles';
 
@@ -8,6 +9,10 @@ interface CoffeeItemProps {
 }
 
 export function CoffeeItem({ coffee }: CoffeeItemProps) {
+  const { cart } = useCartContext();
+
+  const storedValue = cart.find((product) => product.id === coffee.id)?.amount;
+
   return (
     <Container>
       <img
@@ -31,8 +36,8 @@ export function CoffeeItem({ coffee }: CoffeeItemProps) {
           </strong>
         </span>
         <Cart>
-          <CartInput />
-          <CartButton />
+          <CartInput coffeeId={coffee.id} storedValue={storedValue} />
+          <CartButton badgeValue={storedValue} />
         </Cart>
       </Price>
     </Container>

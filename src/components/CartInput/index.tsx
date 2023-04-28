@@ -1,13 +1,27 @@
 import { Minus, Plus } from 'phosphor-react';
 import { Container } from './styles';
 import { useState } from 'react';
+import { useCartContext } from '../../hooks/useCartContext';
 
-export function CartInput() {
-  const [value, setValue] = useState(0);
+interface CartInputProps {
+  coffeeId: number;
+  storedValue?: number;
+}
+
+export function CartInput({ coffeeId, storedValue }: CartInputProps) {
+  const { addProduct, removeProduct, updateProductAmount, cart } =
+    useCartContext();
+
+  const [value, setValue] = useState(storedValue || 0);
 
   function handleIncreaseValue() {
     setValue((prevValue) => {
       if (prevValue < 20) {
+        if (prevValue === 0) {
+          addProduct(coffeeId);
+        } else {
+          updateProductAmount({ productId: coffeeId, amount: prevValue + 1 });
+        }
         return prevValue + 1;
       }
       return prevValue;
@@ -17,10 +31,29 @@ export function CartInput() {
   function handleDecreaseValue() {
     setValue((prevValue) => {
       if (prevValue > 0) {
+        if (prevValue === 1) {
+          removeProduct(coffeeId);
+        } else {
+          updateProductAmount({ productId: coffeeId, amount: prevValue - 1 });
+        }
         return prevValue - 1;
       }
       return prevValue;
     });
+  }
+
+  function updateQuantity(quantity: number) {
+    if (quantity === 0) {
+      removeProduct(coffeeId);
+    }
+    if (cart.some((product) => product.id === coffeeId)) {
+      updateProductAmount({ productId: coffeeId, amount: quantity });
+    } else {
+      addProduct(coffeeId);
+      updateProductAmount({ productId: coffeeId, amount: quantity });
+    }
+
+    setValue(quantity);
   }
 
   return (
@@ -31,7 +64,8 @@ export function CartInput() {
       <input
         type='number'
         value={value}
-        onChange={(e) => setValue(Number(e.target.value))}
+        onChange={(e) => updateQuantity(Number(e.target.value))}
+        readOnly
       />
       <button type='button' onClick={handleIncreaseValue}>
         <Plus />

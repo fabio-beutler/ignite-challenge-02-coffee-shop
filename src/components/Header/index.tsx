@@ -5,9 +5,15 @@ import logo from '../../assets/logo.svg';
 import { MapPin } from 'phosphor-react';
 import { CartLink } from '../CartLink';
 import { Link } from 'react-router-dom';
+import { useCartContext } from '../../hooks/useCartContext';
 
 export function Header() {
   const { address, error } = useLocation();
+  const { cart } = useCartContext();
+
+  const storedValue = cart.reduce((acc, product) => {
+    return acc + product.amount;
+  }, 0);
 
   return (
     <Container>
@@ -24,7 +30,7 @@ export function Header() {
             {address.city}, {address.state}
           </span>
         )}
-        <CartLink />
+        <CartLink badgeValue={storedValue} />
       </div>
     </Container>
   );

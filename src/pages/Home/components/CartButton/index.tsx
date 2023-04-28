@@ -7,7 +7,7 @@ interface CartLinkProps {
 
 export function CartButton({ badgeValue }: CartLinkProps) {
   return (
-    <CartIcon value={badgeValue} type='button'>
+    <CartIcon value={badgeValue} type='button' to='/cart'>
       <ShoppingCart weight='fill' size={22} />
     </CartIcon>
   );
