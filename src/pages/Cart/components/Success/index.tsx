@@ -1,8 +1,19 @@
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react';
-import illustration from '../../assets/illustration.svg';
+import illustration from '../../../../assets/illustration.svg';
 import { Container, Content, Info, Item, Text } from './styles';
+import { NewOrderFormData } from '../..';
 
-export function Success() {
+interface SuccessProps {
+  data: NewOrderFormData;
+}
+
+enum PaymentMethod {
+  credit = 'Cartão de Crédito',
+  debit = 'Cartão de Débito',
+  cash = 'Dinheiro',
+}
+
+export function Success({ data }: SuccessProps) {
   return (
     <Container>
       <h1>Uhu! Pedido confirmado</h1>
@@ -16,9 +27,14 @@ export function Success() {
             </span>
             <Text>
               <p>
-                Entrega em <strong>Rua João Daniel Martinelli, 102</strong>
+                Entrega em{' '}
+                <strong>
+                  {data.street}, {data.number}
+                </strong>
               </p>
-              <p>Farrrapos - Porto Alegre, RS</p>
+              <p>
+                {data.district} - {data.city}, {data.uf}
+              </p>
             </Text>
           </Item>
           <Item>
@@ -39,7 +55,7 @@ export function Success() {
             <Text>
               <p>Pagamento da entrega</p>
               <p>
-                <strong>Cartão de Crédito</strong>
+                <strong>{PaymentMethod[data.paymentMethod]}</strong>
               </p>
             </Text>
           </Item>

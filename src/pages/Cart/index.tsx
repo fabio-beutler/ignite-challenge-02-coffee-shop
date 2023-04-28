@@ -6,8 +6,8 @@ import { Container } from './styles';
 import { FormProvider, useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { useEffect, useState } from 'react';
-import { Success } from '../Success';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Success } from './components/Success';
 
 const newOrderFormValidationSchema = z.object({
   cep: z.string().nonempty('O CEP é obrigatório'),
@@ -25,23 +25,28 @@ const newOrderFormValidationSchema = z.object({
 export type NewOrderFormData = z.infer<typeof newOrderFormValidationSchema>;
 
 export function Cart() {
-  const { cart } = useCartContext();
+  const { cart, clearCart } = useCartContext();
   const newOrderForm = useForm<NewOrderFormData>({
     resolver: zodResolver(newOrderFormValidationSchema),
   });
-  const { handleSubmit, formState } = newOrderForm;
+  const { handleSubmit, formState, reset } = newOrderForm;
   const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState<NewOrderFormData | null>(null);
 
   function handleConfirmOrder(data: NewOrderFormData) {
-    // setSuccess(true);
-    console.log(formState.errors);
+    setSuccess(true);
     setFormData(data);
+    clearCart();
+    reset();
   }
 
   useEffect(() => {
     console.log(formState.errors);
   }, [formState]);
+
+  if (success && formData) {
+    return <Success data={formData} />;
+  }
 
   if (cart.length === 0) {
     return (
@@ -51,10 +56,6 @@ export function Cart() {
         </h1>
       </Container>
     );
-  }
-
-  if (success && formData) {
-    return <Success />;
   }
 
   return (
