@@ -82,6 +82,12 @@ export const PaymentContainer = styled.div`
   padding: 2.5rem;
   border-radius: 6px;
   background-color: ${({ theme }) => theme.colors['base-card']};
+
+  > p {
+    font-size: 0.875rem;
+    color: ${({ theme }) => theme.colors['red']};
+    margin: 1rem 1.5rem 0;
+  }
 `;
 
 export const Payment = styled.div`

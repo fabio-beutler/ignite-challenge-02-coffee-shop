@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useEffect, useState } from 'react';
+import { createContext, ReactNode, useState } from 'react';
 import { Coffee, CoffeeMenu } from '../constants/menu';
 import { toast } from 'react-toastify';
 
@@ -20,6 +20,7 @@ interface CartContextData {
   addProduct: (productId: number) => Promise<void>;
   removeProduct: (productId: number) => void;
   updateProductAmount: ({ productId, amount }: UpdateProductAmount) => void;
+  clearCart: () => void;
 }
 
 export const CartContext = createContext<CartContextData>(
@@ -108,13 +109,20 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     }
   };
 
-  useEffect(() => {
-    console.log(cart);
-  }, [cart]);
+  function clearCart() {
+    localStorage.removeItem('@coffee-shop:cart');
+    setCart([]);
+  }
 
   return (
     <CartContext.Provider
-      value={{ cart, addProduct, removeProduct, updateProductAmount }}
+      value={{
+        cart,
+        addProduct,
+        removeProduct,
+        updateProductAmount,
+        clearCart,
+      }}
     >
       {children}
     </CartContext.Provider>

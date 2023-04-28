@@ -9,6 +9,12 @@ export const InputContainer = styled.div`
     font-size: 0.875rem;
   }
 
+  p {
+    color: ${({ theme }) => theme.colors['red']};
+    font-size: 0.85rem;
+    margin-left: 0.2rem;
+  }
+
   input[type='text']:not(:placeholder-shown) + label,
   input[type='text']:not(:placeholder-shown) ~ span {
     opacity: 0;

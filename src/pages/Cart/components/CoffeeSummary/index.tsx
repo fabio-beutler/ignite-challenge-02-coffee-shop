@@ -1,18 +1,12 @@
-import { useNavigate } from 'react-router-dom';
 import { Container, Row } from './styles';
 import { useCartContext } from '../../../../hooks/useCartContext';
 
 export function CoffeeSummary() {
   const { cart } = useCartContext();
-  const navigate = useNavigate();
 
   const totalPrice = cart.reduce((acc, product) => {
     return acc + product.price * product.amount;
   }, 0);
-
-  function handleConfirmOrder() {
-    navigate('/success');
-  }
 
   return (
     <Container>
@@ -31,9 +25,7 @@ export function CoffeeSummary() {
         </span>
       </Row>
 
-      <button type='button' onClick={handleConfirmOrder}>
-        Confirmar pedido
-      </button>
+      <button type='submit'>Confirmar pedido</button>
     </Container>
   );
 }

@@ -14,8 +14,14 @@ import {
   PaymentContainer,
 } from './styles';
 import { Input } from '../../../../components/Input';
+import { useFormContext } from 'react-hook-form';
+import { NewOrderFormData } from '../..';
 
 export function FormSection() {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<NewOrderFormData>();
   return (
     <Container>
       <h1>Complete seu pedido</h1>
@@ -31,13 +37,42 @@ export function FormSection() {
         </Header>
 
         <Form>
-          <Input placeholder='CEP' />
-          <Input placeholder='Rua' />
-          <Input placeholder='Número' />
-          <Input placeholder='Complemento' optional />
-          <Input placeholder='Bairro' />
-          <Input placeholder='Cidade' />
-          <Input placeholder='UF' />
+          <Input
+            placeholder='CEP'
+            {...register('cep')}
+            error={errors.cep?.message}
+          />
+          <Input
+            placeholder='Rua'
+            {...register('street')}
+            error={errors.street?.message}
+          />
+          <Input
+            placeholder='Número'
+            {...register('number')}
+            error={errors.number?.message}
+          />
+          <Input
+            placeholder='Complemento'
+            {...register('complement')}
+            error={errors.complement?.message}
+            optional
+          />
+          <Input
+            placeholder='Bairro'
+            {...register('district')}
+            error={errors.district?.message}
+          />
+          <Input
+            placeholder='Cidade'
+            {...register('city')}
+            error={errors.city?.message}
+          />
+          <Input
+            placeholder='UF'
+            {...register('uf')}
+            error={errors.uf?.message}
+          />
         </Form>
       </FormContainer>
       <PaymentContainer>
@@ -52,27 +87,43 @@ export function FormSection() {
             </p>
           </div>
         </Header>
+        {errors.paymentMethod && <p>{errors.paymentMethod.message}</p>}
         <Payment>
           <label htmlFor='credit'>
             <span>
               <CreditCard />
             </span>
             Cartão de Crédito
-            <input type='radio' id='credit' name='payment-option' />
+            <input
+              type='radio'
+              id='credit'
+              value='credit'
+              {...register('paymentMethod')}
+            />
           </label>
           <label htmlFor='debit'>
             <span>
               <Bank />
             </span>
             Cartão de Débito
-            <input type='radio' id='debit' name='payment-option' />
+            <input
+              type='radio'
+              id='debit'
+              value='debit'
+              {...register('paymentMethod')}
+            />
           </label>
           <label htmlFor='cash'>
             <span>
               <Money />
             </span>
             Dinheiro
-            <input type='radio' id='cash' name='payment-option' />
+            <input
+              type='radio'
+              id='cash'
+              value='cash'
+              {...register('paymentMethod')}
+            />
           </label>
         </Payment>
       </PaymentContainer>

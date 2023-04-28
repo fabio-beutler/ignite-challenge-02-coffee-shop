@@ -19,6 +19,10 @@ export const defaultTheme = {
     'purple-dark': '#4B2995',
     purple: '#8047F8',
     'purple-light': '#EBE5F9',
+
+    'red-dark': '#A53F3F',
+    red: '#E95E5E',
+    'red-light': '#F9E9E9',
   },
   gradients: {
     linear: 'linear-gradient(110deg, #DBAC2C 0%, #8047F8 100%)',

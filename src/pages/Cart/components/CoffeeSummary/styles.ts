@@ -20,6 +20,14 @@ export const Container = styled.div`
     &:hover {
       background-color: ${({ theme }) => theme.colors['yellow-dark']};
     }
+
+    &:disabled {
+      cursor: not-allowed;
+      filter: brightness(0.8);
+    }
+    &:disabled:hover {
+      background-color: ${({ theme }) => theme.colors['yellow']};
+    }
   }
 `;
 
