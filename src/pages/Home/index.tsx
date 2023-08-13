@@ -1,9 +1,11 @@
-import { HeroAttributes, HeroSection, HeroText } from './styles';
-import heroImage from '../../assets/hero.png';
-import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react';
-import { CoffeeList } from './components/CoffeeList';
-import { CoffeeItem } from './components/CoffeeItem';
-import { CoffeeMenu } from '../../constants/menu';
+import { Coffee, Package, ShoppingCart, Timer } from "phosphor-react";
+
+import heroImage from "@/assets/hero.png";
+import { CoffeeMenu } from "@/constants/menu";
+
+import { CoffeeItem } from "./components/CoffeeItem";
+import { CoffeeList } from "./components/CoffeeList";
+import { HeroAttributes, HeroSection, HeroText } from "./styles";
 
 export function Home() {
   return (
@@ -19,31 +21,31 @@ export function Home() {
           <HeroAttributes>
             <p>
               <span>
-                <ShoppingCart weight='fill' />
+                <ShoppingCart weight="fill" />
               </span>
               Compra simples e segura
             </p>
             <p>
               <span>
-                <Package weight='fill' />
+                <Package weight="fill" />
               </span>
               Embalagem mantém o café intacto
             </p>
             <p>
               <span>
-                <Timer weight='fill' />
+                <Timer weight="fill" />
               </span>
               Entrega rápida e rastreada
             </p>
             <p>
               <span>
-                <Coffee weight='fill' />
+                <Coffee weight="fill" />
               </span>
               O café chega fresquinho até você
             </p>
           </HeroAttributes>
         </HeroText>
-        <img src={heroImage} alt='Copo térmico de café' />
+        <img src={heroImage} alt="Copo térmico de café" />
       </HeroSection>
       <CoffeeList>
         {CoffeeMenu.map((coffee) => (

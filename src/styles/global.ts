@@ -1,5 +1,6 @@
-import { createGlobalStyle } from 'styled-components';
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
 	* {
@@ -9,8 +10,8 @@ export const GlobalStyle = createGlobalStyle`
 	}
 
 	body {
-		color: ${({ theme }) => theme.colors['base-text']};
-		background-color: ${({ theme }) => theme.colors['background']};
+		color: ${({ theme }) => theme.colors["base-text"]};
+		background-color: ${({ theme }) => theme.colors["background"]};
 		-webkit-font-smoothing: antialiased;
 	}
 	

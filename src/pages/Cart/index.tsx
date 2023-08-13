@@ -1,24 +1,26 @@
-import { Link } from 'react-router-dom';
-import { useCartContext } from '../../hooks/useCartContext';
-import { CartSection } from './components/CartSection';
-import { FormSection } from './components/FormSection';
-import { Container } from './styles';
-import { FormProvider, useForm } from 'react-hook-form';
-import * as z from 'zod';
-import { useEffect, useState } from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Success } from './components/Success';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import * as z from "zod";
+
+import { useCartContext } from "@/hooks/useCartContext";
+
+import { CartSection } from "./components/CartSection";
+import { FormSection } from "./components/FormSection";
+import { Success } from "./components/Success";
+import { Container } from "./styles";
 
 const newOrderFormValidationSchema = z.object({
-  cep: z.string().nonempty('O CEP é obrigatório'),
-  street: z.string().nonempty('A rua é obrigatória'),
-  number: z.string().nonempty('O número é obrigatório'),
+  cep: z.string().nonempty("O CEP é obrigatório"),
+  street: z.string().nonempty("A rua é obrigatória"),
+  number: z.string().nonempty("O número é obrigatório"),
   complement: z.string().optional(),
-  district: z.string().nonempty('O bairro é obrigatório'),
-  city: z.string().nonempty('A cidade é obrigatória'),
-  uf: z.string().nonempty('Obrigatório').max(2, 'No máximo 2 caracteres'),
-  paymentMethod: z.enum(['credit', 'debit', 'cash'] as const, {
-    invalid_type_error: 'Selecione uma forma de pagamento',
+  district: z.string().nonempty("O bairro é obrigatório"),
+  city: z.string().nonempty("A cidade é obrigatória"),
+  uf: z.string().nonempty("Obrigatório").max(2, "No máximo 2 caracteres"),
+  paymentMethod: z.enum(["credit", "debit", "cash"] as const, {
+    invalid_type_error: "Selecione uma forma de pagamento",
   }),
 });
 
@@ -29,7 +31,7 @@ export function Cart() {
   const newOrderForm = useForm<NewOrderFormData>({
     resolver: zodResolver(newOrderFormValidationSchema),
   });
-  const { handleSubmit, formState, reset } = newOrderForm;
+  const { handleSubmit, reset } = newOrderForm;
   const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState<NewOrderFormData | null>(null);
 
@@ -40,10 +42,6 @@ export function Cart() {
     reset();
   }
 
-  useEffect(() => {
-    console.log(formState.errors);
-  }, [formState]);
-
   if (success && formData) {
     return <Success data={formData} />;
   }
@@ -52,7 +50,7 @@ export function Cart() {
     return (
       <Container>
         <h1>
-          Seu carrinho está vazio, <Link to='/'>volte</Link> para o menu
+          Seu carrinho está vazio, <Link to="/">volte</Link> para o menu
         </h1>
       </Container>
     );

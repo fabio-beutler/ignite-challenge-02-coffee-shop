@@ -1,8 +1,10 @@
-import { Trash } from 'phosphor-react';
-import { CartInput } from '../../../../components/CartInput';
-import { Buttons, Container, Content, RemoveButton, Text } from './styles';
-import { useCartContext } from '../../../../hooks/useCartContext';
-import { Product } from '../../../../contexts/CartContext';
+import { Trash } from "phosphor-react";
+
+import { CartInput } from "@/components/CartInput";
+import { Product } from "@/contexts/CartContext";
+import { useCartContext } from "@/hooks/useCartContext";
+
+import { Buttons, Container, Content, RemoveButton, Text } from "./styles";
 
 interface CoffeeItemProps {
   coffee: Product;
@@ -25,7 +27,7 @@ export function CoffeeItem({ coffee }: CoffeeItemProps) {
           <Buttons>
             <CartInput coffeeId={coffee.id} storedValue={storedValue} />
             <RemoveButton
-              type='button'
+              type="button"
               onClick={() => removeProduct(coffee.id)}
             >
               <span>
@@ -37,8 +39,8 @@ export function CoffeeItem({ coffee }: CoffeeItemProps) {
         </Text>
       </Content>
       <span>
-        <span style={{ marginRight: '4px' }}>R$</span>
-        {(coffee.price * coffee.amount).toFixed(2).toString().replace('.', ',')}
+        <span style={{ marginRight: "4px" }}>R$</span>
+        {(coffee.price * coffee.amount).toFixed(2).toString().replace(".", ",")}
       </span>
     </Container>
   );

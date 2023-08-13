@@ -1,11 +1,12 @@
-import { useLocation } from '../../hooks/useLocation';
-import { Container } from './styles';
+import { MapPin } from "phosphor-react";
+import { Link } from "react-router-dom";
 
-import logo from '../../assets/logo.svg';
-import { MapPin } from 'phosphor-react';
-import { CartLink } from '../CartLink';
-import { Link } from 'react-router-dom';
-import { useCartContext } from '../../hooks/useCartContext';
+import { useCartContext } from "@/hooks/useCartContext";
+import { useLocation } from "@/hooks/useLocation";
+
+import logo from "../../assets/logo.svg";
+import { CartLink } from "../CartLink";
+import { Container } from "./styles";
 
 export function Header() {
   const { address, error } = useLocation();
@@ -17,15 +18,15 @@ export function Header() {
 
   return (
     <Container>
-      <Link to='/'>
-        <img src={logo} alt='Coffee Delivery' />
+      <Link to="/">
+        <img src={logo} alt="Coffee Delivery" />
       </Link>
 
       <div>
         {!error && address && (
           <span>
             <span>
-              <MapPin weight='fill' size={22} />
+              <MapPin weight="fill" size={22} />
             </span>
             {address.city}, {address.state}
           </span>

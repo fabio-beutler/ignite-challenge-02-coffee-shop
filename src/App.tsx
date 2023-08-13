@@ -1,9 +1,10 @@
-import { BrowserRouter } from 'react-router-dom';
-import { Router } from './Router';
-import { ThemeProvider } from 'styled-components';
-import { defaultTheme } from './styles/themes/default';
-import { GlobalStyle } from './styles/global';
-import { CartProvider } from './contexts/CartContext';
+import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+
+import { CartProvider } from "@/contexts/CartContext";
+import { Router } from "@/Router";
+import { GlobalStyle } from "@/styles/global";
+import { defaultTheme } from "@/styles/themes/default";
 
 export function App() {
   return (

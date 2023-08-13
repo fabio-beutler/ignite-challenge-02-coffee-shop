@@ -1,8 +1,9 @@
-import { CartInput } from '../../../../components/CartInput';
-import type { Coffee } from '../../../../constants/menu';
-import { useCartContext } from '../../../../hooks/useCartContext';
-import { CartButton } from '../CartButton';
-import { Badges, Cart, Container, Price, Text } from './styles';
+import { CartInput } from "@/components/CartInput";
+import type { Coffee } from "@/constants/menu";
+import { useCartContext } from "@/hooks/useCartContext";
+
+import { CartButton } from "../CartButton";
+import { Badges, Cart, Container, Price, Text } from "./styles";
 
 interface CoffeeItemProps {
   coffee: Coffee;
@@ -32,7 +33,7 @@ export function CoffeeItem({ coffee }: CoffeeItemProps) {
         <span>
           R$
           <strong>
-            {coffee.price.toFixed(2).toString().replace('.', ',')}
+            {coffee.price.toFixed(2).toString().replace(".", ",")}
           </strong>
         </span>
         <Cart>

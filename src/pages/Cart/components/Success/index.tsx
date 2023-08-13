@@ -1,16 +1,18 @@
-import { CurrencyDollar, MapPin, Timer } from 'phosphor-react';
-import illustration from '../../../../assets/illustration.svg';
-import { Container, Content, Info, Item, Text } from './styles';
-import { NewOrderFormData } from '../..';
+import { CurrencyDollar, MapPin, Timer } from "phosphor-react";
+
+import illustration from "@/assets/illustration.svg";
+import { NewOrderFormData } from "@/pages/Cart";
+
+import { Container, Content, Info, Item, Text } from "./styles";
 
 interface SuccessProps {
   data: NewOrderFormData;
 }
 
 enum PaymentMethod {
-  credit = 'Cartão de Crédito',
-  debit = 'Cartão de Débito',
-  cash = 'Dinheiro',
+  credit = "Cartão de Crédito",
+  debit = "Cartão de Débito",
+  cash = "Dinheiro",
 }
 
 export function Success({ data }: SuccessProps) {
@@ -27,7 +29,7 @@ export function Success({ data }: SuccessProps) {
             </span>
             <Text>
               <p>
-                Entrega em{' '}
+                Entrega em{" "}
                 <strong>
                   {data.street}, {data.number}
                 </strong>
@@ -62,7 +64,7 @@ export function Success({ data }: SuccessProps) {
         </Info>
         <img
           src={illustration}
-          alt='Motoboy pilotando uma motocicleta roxa com uma caixa de café no baú da moto'
+          alt="Motoboy pilotando uma motocicleta roxa com uma caixa de café no baú da moto"
         />
       </Content>
     </Container>

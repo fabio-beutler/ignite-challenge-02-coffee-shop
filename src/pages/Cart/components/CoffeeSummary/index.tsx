@@ -1,5 +1,6 @@
-import { Container, Row } from './styles';
-import { useCartContext } from '../../../../hooks/useCartContext';
+import { useCartContext } from "@/hooks/useCartContext";
+
+import { Container, Row } from "./styles";
 
 export function CoffeeSummary() {
   const { cart } = useCartContext();
@@ -12,7 +13,7 @@ export function CoffeeSummary() {
     <Container>
       <Row>
         <p>Total de itens</p>
-        <span>R$ {totalPrice.toFixed(2).toString().replace('.', ',')}</span>
+        <span>R$ {totalPrice.toFixed(2).toString().replace(".", ",")}</span>
       </Row>
       <Row>
         <p>Entrega</p>
@@ -21,11 +22,11 @@ export function CoffeeSummary() {
       <Row>
         <p>Total</p>
         <span>
-          R$ {(totalPrice + 3.5).toFixed(2).toString().replace('.', ',')}
+          R$ {(totalPrice + 3.5).toFixed(2).toString().replace(".", ",")}
         </span>
       </Row>
 
-      <button type='submit'>Confirmar pedido</button>
+      <button type="submit">Confirmar pedido</button>
     </Container>
   );
 }

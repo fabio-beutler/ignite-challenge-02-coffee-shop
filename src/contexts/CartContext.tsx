@@ -1,6 +1,7 @@
-import { createContext, ReactNode, useState } from 'react';
-import { Coffee, CoffeeMenu } from '../constants/menu';
-import { toast } from 'react-toastify';
+import { createContext, ReactNode, useState } from "react";
+import { toast } from "react-toastify";
+
+import { Coffee, CoffeeMenu } from "../constants/menu";
 
 interface CartProviderProps {
   children: ReactNode;
@@ -17,19 +18,19 @@ export interface Product extends Coffee {
 
 interface CartContextData {
   cart: Product[];
-  addProduct: (productId: number) => Promise<void>;
+  addProduct: (productId: number) => void;
   removeProduct: (productId: number) => void;
   updateProductAmount: ({ productId, amount }: UpdateProductAmount) => void;
   clearCart: () => void;
 }
 
 export const CartContext = createContext<CartContextData>(
-  {} as CartContextData
+  {} as CartContextData,
 );
 
 export function CartProvider({ children }: CartProviderProps): JSX.Element {
   const [cart, setCart] = useState<Product[]>(() => {
-    const storagedCart = localStorage.getItem('@coffee-shop:cart');
+    const storagedCart = localStorage.getItem("@coffee-shop:cart");
 
     if (storagedCart) {
       return JSON.parse(storagedCart);
@@ -38,11 +39,11 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     return [];
   });
 
-  const addProduct = async (productId: number) => {
+  const addProduct = (productId: number) => {
     try {
       const updatedCart = [...cart];
       const productExists = updatedCart.find(
-        (product) => product.id === productId
+        (product) => product.id === productId,
       );
       const currentAmount = productExists ? productExists.amount : 0;
       const amount = currentAmount + 1;
@@ -56,11 +57,11 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
       }
 
       setCart(updatedCart);
-      localStorage.setItem('@coffee-shop:cart', JSON.stringify(updatedCart));
+      localStorage.setItem("@coffee-shop:cart", JSON.stringify(updatedCart));
 
-      toast.success('Produto adicionado com sucesso');
+      toast.success("Produto adicionado com sucesso");
     } catch {
-      toast.error('Erro na adição do produto');
+      toast.error("Erro na adição do produto");
     }
   };
 
@@ -68,25 +69,22 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     try {
       const updatedCart = [...cart];
       const productIndex = updatedCart.findIndex(
-        (product) => product.id === productId
+        (product) => product.id === productId,
       );
 
       if (productIndex >= 0) {
         updatedCart.splice(productIndex, 1);
         setCart(updatedCart);
-        localStorage.setItem('@coffee-shop:cart', JSON.stringify(updatedCart));
+        localStorage.setItem("@coffee-shop:cart", JSON.stringify(updatedCart));
       } else {
         throw Error();
       }
     } catch {
-      toast.error('Erro na remoção do produto');
+      toast.error("Erro na remoção do produto");
     }
   };
 
-  const updateProductAmount = async ({
-    productId,
-    amount,
-  }: UpdateProductAmount) => {
+  const updateProductAmount = ({ productId, amount }: UpdateProductAmount) => {
     try {
       if (amount <= 0) {
         return;
@@ -94,23 +92,23 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
 
       const updatedCart = [...cart];
       const productExists = updatedCart.find(
-        (product) => product.id === productId
+        (product) => product.id === productId,
       );
 
       if (productExists) {
         productExists.amount = amount;
         setCart(updatedCart);
-        localStorage.setItem('@coffee-shop:cart', JSON.stringify(updatedCart));
+        localStorage.setItem("@coffee-shop:cart", JSON.stringify(updatedCart));
       } else {
-        throw Error();
+        console.error("Erro na alteração de quantidade do produto");
       }
     } catch {
-      toast.error('Erro na alteração de quantidade do produto');
+      toast.error("Erro na alteração de quantidade do produto");
     }
   };
 
   function clearCart() {
-    localStorage.removeItem('@coffee-shop:cart');
+    localStorage.removeItem("@coffee-shop:cart");
     setCart([]);
   }
 

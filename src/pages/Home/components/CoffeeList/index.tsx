@@ -1,6 +1,8 @@
-import { Container, List } from './styles';
+import { ReactNode } from "react";
 
-export function CoffeeList({ children }: { children: React.ReactNode }) {
+import { Container, List } from "./styles";
+
+export function CoffeeList({ children }: { children: ReactNode }) {
   return (
     <Container>
       <h2>Nossos cafés</h2>

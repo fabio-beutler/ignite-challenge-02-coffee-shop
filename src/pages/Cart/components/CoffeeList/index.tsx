@@ -1,7 +1,9 @@
-import { List } from './styles';
+import { ReactNode } from "react";
+
+import { List } from "./styles";
 
 interface CoffeeListProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export function CoffeeList({ children }: CoffeeListProps) {

@@ -1,7 +1,9 @@
-import { Minus, Plus } from 'phosphor-react';
-import { Container } from './styles';
-import { useState } from 'react';
-import { useCartContext } from '../../hooks/useCartContext';
+import { Minus, Plus } from "phosphor-react";
+import { useState } from "react";
+
+import { useCartContext } from "@/hooks/useCartContext";
+
+import { Container } from "./styles";
 
 interface CartInputProps {
   coffeeId: number;
@@ -58,16 +60,16 @@ export function CartInput({ coffeeId, storedValue }: CartInputProps) {
 
   return (
     <Container>
-      <button type='button' onClick={handleDecreaseValue}>
+      <button type="button" onClick={handleDecreaseValue}>
         <Minus />
       </button>
       <input
-        type='number'
+        type="number"
         value={value}
         onChange={(e) => updateQuantity(Number(e.target.value))}
         readOnly
       />
-      <button type='button' onClick={handleIncreaseValue}>
+      <button type="button" onClick={handleIncreaseValue}>
         <Plus />
       </button>
     </Container>
