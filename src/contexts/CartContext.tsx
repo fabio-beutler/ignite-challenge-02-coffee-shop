@@ -77,7 +77,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
         setCart(updatedCart);
         localStorage.setItem("@coffee-shop:cart", JSON.stringify(updatedCart));
       } else {
-        throw Error();
+        console.error("Erro na remoção do produto");
       }
     } catch {
       toast.error("Erro na remoção do produto");
